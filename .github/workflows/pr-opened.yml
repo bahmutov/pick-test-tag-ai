@@ -32,3 +32,13 @@ jobs:
       - name: Print the determined tag 🏷️
         run: |
           echo "The determined test tag is: ${{ steps.find_test_tag.outputs.TAG }}" >> $GITHUB_STEP_SUMMARY
+
+      - name: Comment on PR with the found tag 💬
+        # https://github.com/peter-evans/create-or-update-comment
+        uses: peter-evans/create-or-update-comment@v4
+        with:
+          token: ${{ secrets.GH_PERSONAL_TOKEN }}
+          repository: ${{ github.event.repository.full_name }}
+          issue-number: ${{ github.event.pull_request.number }}
+          body: |
+            I recommend running tests tagged **${{ steps.find_test_tag.outputs.TAG }}**
