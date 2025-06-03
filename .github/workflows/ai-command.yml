@@ -5,7 +5,7 @@ on:
     types: [ai-command]
 
 jobs:
-  print:
+  find-test-tag:
     runs-on: ubuntu-24.04
     steps:
       - name: Dump the client payload body
