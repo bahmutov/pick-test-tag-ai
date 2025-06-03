@@ -12,3 +12,19 @@ jobs:
         env:
           PAYLOAD_CONTEXT: ${{ toJson(github.event.client_payload.pull_request.body) }}
         run: echo "$PAYLOAD_CONTEXT"
+
+      - name: Checkout 🛎
+        uses: actions/checkout@v4
+
+      - name: Install dependencies 📦
+        # https://github.com/cypress-io/github-action
+        uses: cypress-io/github-action@v6
+        with:
+          runTests: false
+
+      - name: Determine the test tag 🏷️
+        run: node ask.mjs
+        env:
+          OPEN_AI_API_KEY: ${{ secrets.OPEN_AI_API_KEY }}
+          OPEN_AI_BASE_URL: ${{ secrets.OPEN_AI_BASE_URL }}
+          CODE_CHANGES: ${{ github.event.client_payload.pull_request.body }}

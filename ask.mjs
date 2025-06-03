@@ -30,7 +30,10 @@ const instructions = `
   If no test tag is applicable, return "@smoke".
 `
 
-const input = 'changing how items are stored'
+const input = process.env['CODE_CHANGES']
+if (!input) {
+  throw new Error('CODE_CHANGES environment variable is required')
+}
 
 const answer = await ask(instructions, input)
 

@@ -23,9 +23,3 @@ jobs:
 
       - name: Print test tags 🏷️
         run: npm run print-tags
-
-      - name: Demo LLM 🖼️
-        run: node ask.mjs
-        env:
-          OPEN_AI_API_KEY: ${{ secrets.OPEN_AI_API_KEY }}
-          OPEN_AI_BASE_URL: ${{ secrets.OPEN_AI_BASE_URL }}
