@@ -17,3 +17,9 @@ jobs:
           start: npm run start:ci
           # quote the url to be safe against YML parsing surprises
           wait-on: 'http://localhost:8888'
+
+      - name: Print test titles 🖨️
+        run: npm run print-tests
+
+      - name: Print test tags 🏷️
+        run: npm run print-tags
