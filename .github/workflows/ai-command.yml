@@ -36,7 +36,7 @@ jobs:
         # https://github.com/peter-evans/create-or-update-comment
         uses: peter-evans/create-or-update-comment@v4
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.GH_PERSONAL_TOKEN }}
           repository: ${{ github.event.client_payload.github.payload.repository.full_name }}
           issue-number: ${{ github.event.client_payload.github.payload.issue.number }}
           body: |
