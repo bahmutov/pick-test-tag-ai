@@ -1,0 +1,34 @@
+name: PR opened
+on:
+  pull_request:
+    types: [opened]
+permissions:
+  contents: write
+  pull-requests: write
+jobs:
+  find-test-tag:
+    name: Find the applicable test tag
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout 🛎
+        uses: actions/checkout@v4
+
+      - name: Install dependencies 📦
+        # https://github.com/cypress-io/github-action
+        uses: cypress-io/github-action@v6
+        with:
+          runTests: false
+
+      - name: Determine the test tag 🏷️
+        id: find_test_tag
+        run: |
+          TAG=$(node ask.mjs)
+          echo "TAG=$TAG" >> $GITHUB_OUTPUT
+        env:
+          OPEN_AI_API_KEY: ${{ secrets.OPEN_AI_API_KEY }}
+          OPEN_AI_BASE_URL: ${{ secrets.OPEN_AI_BASE_URL }}
+          CODE_CHANGES: "${{ github.event.pull_request.title }}\n\n${{ github.event.pull_request.body }}"
+
+      - name: Print the determined tag 🏷️
+        run: |
+          echo "The determined test tag is: ${{ steps.find_test_tag.outputs.TAG }}" >> $GITHUB_STEP_SUMMARY
