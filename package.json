@@ -29,6 +29,7 @@
     "cypress-expect": "2.5.3",
     "cypress-plugin-grep-boxes": "1.1.0",
     "find-cypress-specs": "1.54.1",
+    "openai": "5.0.2",
     "prettier": "3.5.3",
     "start-server-and-test": "2.0.12",
     "stop-only": "3.4.3"
