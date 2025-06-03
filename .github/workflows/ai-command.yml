@@ -23,8 +23,21 @@ jobs:
           runTests: false
 
       - name: Determine the test tag 🏷️
-        run: node ask.mjs
+        id: find_test_tag
+        run: |
+          TAG=$(node ask.mjs)
+          echo "TAG=$TAG" >> $GITHUB_OUTPUT
         env:
           OPEN_AI_API_KEY: ${{ secrets.OPEN_AI_API_KEY }}
           OPEN_AI_BASE_URL: ${{ secrets.OPEN_AI_BASE_URL }}
           CODE_CHANGES: ${{ github.event.client_payload.pull_request.body }}
+
+      - name: Write tag back into the comment 💬
+        # https://github.com/peter-evans/create-or-update-comment
+        uses: peter-evans/create-or-update-comment@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          repository: ${{ github.event.client_payload.github.payload.repository.full_name }}
+          issue-number: ${{ github.event.client_payload.github.payload.issue.number }}
+          body: |
+            The determined test tag is: **${{ steps.find_test_tag.outputs.TAG }}**
