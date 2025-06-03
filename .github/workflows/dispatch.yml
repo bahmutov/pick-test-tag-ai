@@ -14,8 +14,6 @@ jobs:
         uses: peter-evans/slash-command-dispatch@v4
         with:
           token: ${{ secrets.GH_PERSONAL_TOKEN }}
-          # the personal token to post the comment emoji
-          reaction-token: ${{ secrets.GH_PERSONAL_TOKEN }}
           permission: none
           commands: |
             ai
