@@ -8,7 +8,7 @@ jobs:
   print:
     runs-on: ubuntu-24.04
     steps:
-      - name: Dump the client payload context
+      - name: Dump the client payload body
         env:
-          PAYLOAD_CONTEXT: ${{ toJson(github.event.client_payload) }}
+          PAYLOAD_CONTEXT: ${{ toJson(github.event.client_payload.pull_request.body) }}
         run: echo "$PAYLOAD_CONTEXT"
