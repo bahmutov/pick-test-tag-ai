@@ -38,6 +38,10 @@ jobs:
           OPEN_AI_BASE_URL: ${{ secrets.OPEN_AI_BASE_URL }}
           CODE_CHANGES: "${{ github.event.client_payload.pull_request.title }}\n\n${{ github.event.client_payload.pull_request.body }}"
 
+      - name: Print the determined tag 🏷️
+        run: |
+          echo "The determined test tag is: ${{ steps.find_test_tag.outputs.TAG }}" >> $GITHUB_STEP_SUMMARY
+
       - name: Write tag back into the comment 💬
         # https://github.com/peter-evans/create-or-update-comment
         uses: peter-evans/create-or-update-comment@v4
