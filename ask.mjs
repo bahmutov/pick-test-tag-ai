@@ -35,6 +35,10 @@ if (!input) {
   throw new Error('CODE_CHANGES environment variable is required')
 }
 
+// output logging into error stream
+console.error('Asking OpenAI for test tags...')
+console.error(input)
+
 const answer = await ask(instructions, input)
 
 console.log(answer)
