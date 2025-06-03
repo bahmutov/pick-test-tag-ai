@@ -5,7 +5,7 @@
 // check this file using TypeScript if available
 // @ts-check
 
-describe('TodoMVC - React', function () {
+describe('TodoMVC - React', { tags: '@complete' }, function () {
   beforeEach(function () {
     // By default Cypress will automatically
     // clear the Local Storage prior to each
@@ -72,27 +72,31 @@ describe('TodoMVC - React', function () {
       cy.get('@todos').eq(2).should('not.have.class', 'completed')
     })
 
-    it('complete all checkbox should update state when items are completed / cleared', function () {
-      // alias the .toggle-all for reuse later
-      cy.get('.toggle-all')
-        .as('toggleAll')
-        .check({ force: true })
-        // this assertion is silly here IMO but
-        // it is what TodoMVC does
-        .should('be.checked')
+    it(
+      'complete all checkbox should update state when items are completed / cleared',
+      { tags: '@smoke' },
+      function () {
+        // alias the .toggle-all for reuse later
+        cy.get('.toggle-all')
+          .as('toggleAll')
+          .check({ force: true })
+          // this assertion is silly here IMO but
+          // it is what TodoMVC does
+          .should('be.checked')
 
-      // alias the first todo and then click it
-      cy.get('.todo-list li').eq(0).as('firstTodo').find('.toggle').uncheck()
+        // alias the first todo and then click it
+        cy.get('.todo-list li').eq(0).as('firstTodo').find('.toggle').uncheck()
 
-      // reference the .toggle-all element again
-      // and make sure its not checked
-      cy.get('@toggleAll').should('not.be.checked')
+        // reference the .toggle-all element again
+        // and make sure its not checked
+        cy.get('@toggleAll').should('not.be.checked')
 
-      // reference the first todo again and now toggle it
-      cy.get('@firstTodo').find('.toggle').check()
+        // reference the first todo again and now toggle it
+        cy.get('@firstTodo').find('.toggle').check()
 
-      // assert the toggle all is checked again
-      cy.get('@toggleAll').should('be.checked')
-    })
+        // assert the toggle all is checked again
+        cy.get('@toggleAll').should('be.checked')
+      },
+    )
   })
 })

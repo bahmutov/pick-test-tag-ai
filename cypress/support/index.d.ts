@@ -5,7 +5,13 @@
 /**
  * The only allowed test tags in this project
  */
-type AllowedTag = '@smoke' | '@misc' | '@new-todo'
+type AllowedTag =
+  | '@smoke'
+  | '@add'
+  | '@complete'
+  | '@edit'
+  | '@routing'
+  | '@persistence'
 
 declare namespace Cypress {
   interface Chainable<Subject> {

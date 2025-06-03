@@ -41,7 +41,7 @@ describe('TodoMVC - React', function () {
   })
 
   // a very simple example helpful during presentations
-  it('adds 4 todos', { tags: '@smoke' }, function () {
+  it('adds 4 todos', { tags: ['@smoke', '@add'] }, function () {
     cy.get('.new-todo')
       .type('learn testing{enter}')
       .type('be cool{enter}')
@@ -67,7 +67,7 @@ describe('TodoMVC - React', function () {
   })
 
   context('No Todos', function () {
-    it('should hide #main and #footer', { tags: '@misc' }, function () {
+    it('should hide #main and #footer', { tags: '@smoke' }, function () {
       // Unlike the TodoMVC tests, we don't need to create
       // a gazillion helper functions which are difficult to
       // parse through. Instead we'll opt to use real selectors
@@ -80,7 +80,7 @@ describe('TodoMVC - React', function () {
     })
   })
 
-  context('New Todo', { tags: '@new-todo' }, function () {
+  context('New Todo', { tags: '@add' }, function () {
     // New commands used here:
     // https://on.cypress.io/type
     // https://on.cypress.io/eq
