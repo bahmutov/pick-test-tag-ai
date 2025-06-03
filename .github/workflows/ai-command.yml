@@ -1,0 +1,14 @@
+name: ai-command
+
+on:
+  repository_dispatch:
+    types: [ai-command]
+
+jobs:
+  print:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Dump the client payload context
+        env:
+          PAYLOAD_CONTEXT: ${{ toJson(github.event.client_payload) }}
+        run: echo "$PAYLOAD_CONTEXT"
