@@ -1,7 +1,7 @@
 import OpenAI from 'openai'
 
 const client = new OpenAI({
-  apiKey: process.env['OPEN_API_KEY'],
+  apiKey: process.env['OPEN_AI_API_KEY'],
   baseURL: process.env['OPEN_AI_BASE_URL'],
 })
 
