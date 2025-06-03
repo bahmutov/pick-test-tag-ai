@@ -40,7 +40,7 @@ jobs:
 
       - name: Print the determined tag 🏷️
         run: |
-          echo "The determined test tag is: ${{ steps.find_test_tag.outputs.TAG }}" >> $GITHUB_STEP_SUMMARY
+          echo "The recommended test tag is: ${{ steps.find_test_tag.outputs.TAG }}" >> $GITHUB_STEP_SUMMARY
 
       - name: Write tag back into the comment 💬
         # https://github.com/peter-evans/create-or-update-comment
@@ -50,4 +50,4 @@ jobs:
           repository: ${{ github.event.client_payload.github.payload.repository.full_name }}
           issue-number: ${{ github.event.client_payload.github.payload.issue.number }}
           body: |
-            The determined test tag is: **${{ steps.find_test_tag.outputs.TAG }}**
+            The recommended test tag is: **${{ steps.find_test_tag.outputs.TAG }}**
