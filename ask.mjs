@@ -8,10 +8,14 @@ const client = new OpenAI({
 async function ask(instructions, input) {
   const response = await client.responses.create({
     // https://platform.openai.com/docs/models
-    model: 'gpt-4.1',
+    model: 'gpt-4.1', // usually gpt-4.1-mini or gpt-4.1
     instructions,
     input,
   })
+
+  console.error('response usage:')
+  console.error(response.usage)
+
   return response.output_text
 }
 
