@@ -79,7 +79,7 @@ describe('TodoMVC - React', { tags: '@routing' }, function () {
       getTodos().should('have.length', 1)
     })
 
-    it('should allow me to display all items @smoke', function () {
+    it('should allow me to display all items', { tags: '@smoke' }, function () {
       getTodos().eq(1).find('.toggle').check()
 
       cy.get('.filters').contains('Active').click()
