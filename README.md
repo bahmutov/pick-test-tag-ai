@@ -4,6 +4,8 @@
 
 [![ci](https://github.com/bahmutov/pick-test-tag-ai/actions/workflows/main.yml/badge.svg?branch=main)](https://github.com/bahmutov/pick-test-tag-ai/actions/workflows/main.yml)
 
+📝 Read the blog post [Test Tag Suggestions Using AI](https://glebbahmutov.com/blog/test-tag-suggestions-using-ai/)
+
 ## Test tags
 
 - `@smoke` a few tests that go through various features of the application
