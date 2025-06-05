@@ -59,6 +59,7 @@ jobs:
           body: |
             The recommended test tag is: **${{ steps.find_test_tag.outputs.TAG }}**
 
+            Result | Value
             ---|---
             **Found Test Tag** | ${{ steps.find_test_tag.outputs.testTag }}
             **Model** | ${{ steps.find_test_tag.outputs.model }}
