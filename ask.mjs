@@ -31,13 +31,19 @@ async function ask(instructions, input) {
   // - model
   // - input and output tokens
   actionsCore.summary.addHeading('Test Tag Result')
-  actionsCore.summary.addTable([
-    ['**Found Test Tag**', response.output_text],
-    ['**Model**', model],
-    ['**Input Tokens**', String(response.usage.input_tokens)],
-    ['**Output Tokens**', String(response.usage.output_tokens)],
-    ['**Total Tokens**', String(response.usage.total_tokens)],
-  ])
+  actionsCore.summary
+    .addTable([
+      ['**Found Test Tag**', response.output_text],
+      ['**Model**', model],
+      ['**Input Tokens**', String(response.usage.input_tokens)],
+      ['**Output Tokens**', String(response.usage.output_tokens)],
+      ['**Total Tokens**', String(response.usage.total_tokens)],
+    ])
+    .addLink(
+      'bahmutov/pick-test-tag-ai',
+      'https://github.com/bahmutov/pick-test-tag-ai',
+    )
+    .write()
 
   return response.output_text
 }
