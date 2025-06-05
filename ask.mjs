@@ -32,11 +32,11 @@ async function ask(instructions, input) {
   // - input and output tokens
   actionsCore.summary.addHeading('Test Tag Result')
   actionsCore.summary.addTable([
-    { header: 'Found Test Tag', data: response.output_text },
-    { header: 'Model', data: model },
-    { header: 'Input Tokens', data: String(response.usage.input_tokens) },
-    { header: 'Output Tokens', data: String(response.usage.output_tokens) },
-    { header: 'Total Tokens', data: String(response.usage.total_tokens) },
+    ['**Found Test Tag**', response.output_text],
+    ['**Model**', model],
+    ['**Input Tokens**', String(response.usage.input_tokens)],
+    ['**Output Tokens**', String(response.usage.output_tokens)],
+    ['**Total Tokens**', String(response.usage.total_tokens)],
   ])
 
   return response.output_text
