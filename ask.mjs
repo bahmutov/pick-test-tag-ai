@@ -1,4 +1,5 @@
 import OpenAI from 'openai'
+import actionsCore from '@actions/core'
 
 const client = new OpenAI({
   apiKey: process.env['OPEN_AI_API_KEY'],
@@ -6,15 +7,37 @@ const client = new OpenAI({
 })
 
 async function ask(instructions, input) {
+  // usually gpt-4.1-mini or gpt-4.1
+  const model = 'gpt-4.1'
   const response = await client.responses.create({
     // https://platform.openai.com/docs/models
-    model: 'gpt-4.1', // usually gpt-4.1-mini or gpt-4.1
+    model,
     instructions,
     input,
   })
 
   console.error('response usage:')
   console.error(response.usage)
+
+  // set actions outputs
+  actionsCore.setOutput('testTag', response.output_text)
+  actionsCore.setOutput('inputTokens', response.usage.input_tokens)
+  actionsCore.setOutput('outputTokens', response.usage.output_tokens)
+  actionsCore.setOutput('totalTokens', response.usage.total_tokens)
+  actionsCore.setOutput('model', model)
+  // set actions summary
+  // print a table with:
+  // - found test tag
+  // - model
+  // - input and output tokens
+  actionsCore.summary.addHeading('Test Tag Result')
+  actionsCore.summary.addTable([
+    { header: 'Found Test Tag', data: response.output_text },
+    { header: 'Model', data: model },
+    { header: 'Input Tokens', data: String(response.usage.input_tokens) },
+    { header: 'Output Tokens', data: String(response.usage.output_tokens) },
+    { header: 'Total Tokens', data: String(response.usage.total_tokens) },
+  ])
 
   return response.output_text
 }
