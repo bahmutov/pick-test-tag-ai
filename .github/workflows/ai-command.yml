@@ -31,6 +31,12 @@ jobs:
 
       - name: Determine the test tag 🏷️
         id: find_test_tag
+        # note: this step produces multiple outputs
+        # actionsCore.setOutput('testTag', response.output_text)
+        # actionsCore.setOutput('inputTokens', response.usage.input_tokens)
+        # actionsCore.setOutput('outputTokens', response.usage.output_tokens)
+        # actionsCore.setOutput('totalTokens', response.usage.total_tokens)
+        # actionsCore.setOutput('model', model)
         run: |
           TAG=$(node ask.mjs)
           echo "TAG=$TAG" >> $GITHUB_OUTPUT
@@ -52,3 +58,10 @@ jobs:
           comment-id: ${{ github.event.client_payload.github.payload.comment.id }}
           body: |
             The recommended test tag is: **${{ steps.find_test_tag.outputs.TAG }}**
+
+            ---|---
+            **Found Test Tag** | ${{ steps.find_test_tag.outputs.testTag }}
+            **Model** | ${{ steps.find_test_tag.outputs.model }}
+            **Input Tokens** | ${{ steps.find_test_tag.outputs.inputTokens }}
+            **Output Tokens** | ${{ steps.find_test_tag.outputs.outputTokens }}
+            **Total Tokens** | ${{ steps.find_test_tag.outputs.totalTokens }}
